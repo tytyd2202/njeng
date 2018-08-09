@@ -343,7 +343,7 @@ def menu():
 	tampil('''\rk%s\n\rc1 \rh Login \n\rc2 \rmKELUAR\n\rk%s'''%('#'*20,'#'*20))
 	i = inputM('root@Karjok:~#',[1,2])
 
-	elif i == 1:
+	if i == 1:
 		lanjutT()
 		idteman()
 	elif i == 2:
