@@ -104,7 +104,7 @@ def buka(d):
 def login():
 	global log
 	us = inputD('?> Gmail or HP')
-	pa = inputD('?>Kata Sandi')
+	pa = inputD('?> Kata Sandi')
 	tampil('\rc %Sedang Login....')
 	buka('https://m.facebook.com')
 	br.select_form(nr=0)
@@ -114,10 +114,11 @@ def login():
 	url = br.geturl()
 	if 'save-device' in url or 'm_sess' in url:
 		tampil('\rc Login Done !')
+		
 		buka('https://mobile.facebook.com/home.php')
 		nama = br.find_link(url_regex='logout.php').text
 		nama = re.findall(r'\((.*a?)\)',nama)[0]
-		tampil('\rh >Welcome To My TOOLS :v \rk%s\n\rh %Sedang Mempesiapkan Alat :V ....'%nama)
+		tampil('\rh[*]Selamat datang \rk%s\n\rh[*]Semoga ini adalah hari keberuntungan mu....'%nama)
 		log = 1
 	elif 'checkpoint' in url:
 		tampil('\rm =>Duh Kasian Akun kena checkpoint :( \n\rk =>Coba Login dengan opera mini :V')
@@ -332,15 +333,16 @@ def menu():
 \rc
 .___         .        .  
 [__  _. _. _ |_  _  _ ;_/
-|   (_](_.(/,[_)(_)(_)| \
-     \rk================== Welcome ===================
+|   (_](_.(/,[_)(_)(_)| \ v.1
+
      \rm[ \rc+ \rm] \rh Coded : Tn.Herp                          
      \rm[ \rc+ \rm] \rh Id Fb : Gwimusa3                          
      \rm[ \rc+ \rm] \rh IG    : @Rezadkim                         
      \rm[ \rc+ \rm] \rh WA    : 0895611252563 & 089620134992      
      \rk------------- FaceBookCrack Tools -------------
+\rh Msg: Ini TooLs njeng :V
 ''')
-	tampil('''\rk%s\n\rc1 \rh Login \n\rc2 \rmKELUAR\n\rk%s'''%('#'*20,'#'*20))
+	tampil('''\rk%s\n\rc1> \rh Login \n\rc2> \rm KELUAR\n\rk%s'''%('#'*20,'#'*20))
 	i = inputM('root@Karjok:~#',[1,2])
 
 	if i == 1:
